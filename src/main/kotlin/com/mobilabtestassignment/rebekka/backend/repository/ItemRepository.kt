@@ -8,12 +8,15 @@ import org.springframework.stereotype.Repository
 @Repository
 interface ItemRepository: CrudRepository<ItemModel, Long> {
 
-    @Query("SELECT * FROM lists")
+    @Query("SELECT * FROM items WHERE items.list_id = :listId")
     fun getItems(listId: Int): List<ItemModel>
 
-    /*
-    @Query("")
+    @Query("INSERT INTO items(id, list_id, value, checkedState) VALUES (:itemModel.id, :itemModel.list_id, :itemModel.value, :itemModel.checkedState)")
     fun addItem(itemModel: ItemModel): ItemModel
 
-     */
+    @Query("DELETE FROM items WHERE items.id = :itemId")
+    fun deleteItem(itemId: Int)
+
+    @Query("UPDATE items SET items.checked_state = itemStatus WHERE items.id = itemId")
+    fun changeItemStatus(itemId: Int, itemStatus: Boolean)
 }
