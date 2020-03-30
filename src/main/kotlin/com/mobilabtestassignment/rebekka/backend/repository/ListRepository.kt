@@ -1,6 +1,7 @@
 package com.mobilabtestassignment.rebekka.backend.repository
 
 import com.mobilabtestassignment.rebekka.backend.model.ListModel
+import org.springframework.data.jdbc.repository.query.Modifying
 import org.springframework.data.jdbc.repository.query.Query
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
@@ -12,11 +13,13 @@ interface ListRepository : CrudRepository<ListModel, Long> {
     fun getLists(): List<ListModel>
 
     @Query("SELECT * FROM lists WHERE lists.id = :listId")
-    fun getList(listId: Int): ListModel
+    fun getList(listId: Int): ListModel?
 
-    @Query("INSERT INTO lists(id, name) VALUES (:listModel.id, :listModel.name)")
-    fun addList(listModel: ListModel): ListModel
+    @Modifying
+    @Query("INSERT INTO lists(name) VALUES (:name)")
+    fun addList(name: String): Int
 
+    @Modifying
     @Query("DELETE FROM lists WHERE lists.id = :listId")
     fun deleteList(listId: Int)
 
