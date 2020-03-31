@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository
 @Repository
 interface ItemRepository: CrudRepository<ItemModel, Long> {
 
-    @Query("SELECT * FROM items WHERE items.list_id = :listId")
+    @Query("SELECT * FROM items WHERE items.list_id = :listId ORDER BY id")
     fun getItems(listId: Int): List<ItemModel>
 
     @Modifying
