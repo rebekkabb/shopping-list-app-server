@@ -1,6 +1,6 @@
 # shopping-list-app-server
 
-This is the server for my shopping list application, created for the Mobilab test assignment.
+This is the server for my shopping list application (https://github.com/rebekkabb/Shopping-list-app), created for the Mobilab test assignment.
 
 ### Running it on you own computer locally
 
