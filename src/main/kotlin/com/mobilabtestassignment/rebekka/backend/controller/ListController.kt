@@ -22,10 +22,10 @@ class ListController(private val listRepository: ListRepository) {
     }
 
     @PutMapping()
-    fun addList(@RequestBody listModel: ListModel): ListModel {
+    fun addList(@RequestBody listModel: ListModel): ResponseEntity<ListModel> {
         val name = listModel.name
         val id = listRepository.addList(name)
-        return listRepository.getList(id)!!
+        return ResponseEntity(listRepository.getList(id)!!, HttpStatus.OK)
     }
 
     @DeleteMapping("/{id}")
